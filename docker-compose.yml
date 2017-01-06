@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+  bridge:
+    build: .
+    ports:
+      - 8000:8000
+    volumes:
+      - ./data:/usr/src/app/data
+    environment:
+      - TRELLO_APIKEY=<API_KEY>
+      - TRELLO_TOKEN=<TOKEN>
+
+networks:
+  default:
+    external:
+      name: main
