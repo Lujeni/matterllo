@@ -11,4 +11,3 @@ requests-oauthlib==0.7.0
 requests==2.12.1
 six==1.10.0
 whitenoise==3.2.2
-unipath==1.1

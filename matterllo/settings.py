@@ -17,10 +17,8 @@ try:
 except ImportError:
     dj_database_url = None
 
-from unipath import Path
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = Path(__file__).ancestor(2)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Quick-start development settings - unsuitable for production
@@ -82,13 +80,13 @@ WSGI_APPLICATION = 'matterllo.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
-DATABASES_DIR = BASE_DIR.child('data')
+DATABASES_DIR = os.path.join(BASE_DIR, 'data')
 if not os.path.exists(DATABASES_DIR):
     os.mkdir(DATABASES_DIR)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': DATABASES_DIR.child('db.sqlite3'),
+        'NAME': os.path.join(DATABASES_DIR, 'db.sqlite3'),
     }
 }
 
@@ -136,7 +134,7 @@ LOGIN_REDIRECT_URL = 'index'
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = BASE_DIR.child('staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
