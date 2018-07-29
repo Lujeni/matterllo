@@ -18,6 +18,18 @@ class Hook(BaseHook):
         payload = u':incoming_envelope: New card "[{card_name}](https://trello.com/c/{card_link})" added to list "[{list_name}](https://trello.com/b/{board_link})" ***by {member_creator}***'
 
         return payload.format(**context)
+    
+    def emailCard(self, action):
+        data = action['data']
+        context = {
+            'board_link': data['board']['shortLink'],
+            'list_name': data['list']['name'],
+            'card_name': data['card']['name'],
+            'card_link': data['card']['shortLink'],
+        }
+        payload = u':incoming_envelope: New card "[{card_name}](https://trello.com/c/{card_link})" added to list "[{list_name}](https://trello.com/b/{board_link})"'
+
+        return payload.format(**context)
 
     def updateCard(self, action):
         data = action['data']
