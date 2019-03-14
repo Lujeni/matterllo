@@ -57,6 +57,7 @@ class Bridge(models.Model):
         ('commentCard', 'commentCard'),
         ('copyCard', 'copyCard'),
         ('createCard', 'createCard'),
+        ('emailCard', 'emailCard'),
         ('moveCardFromBoard', 'moveCardFromBoard'),
         ('moveCardToBoard', 'moveCardToBoard'),
         ('removeLabelFromCard', 'removeLabelFromCard'),
