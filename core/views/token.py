@@ -7,15 +7,11 @@ from django.http import HttpResponse
 
 @method_decorator(login_required, name='dispatch')
 class TokenView(TemplateView):
-    # model = Bridge
-    def get(self, request, *args, **kwargs):
-      token = request.GET.get('token')
-      print request.method
-      response = HttpResponse(token)
-      return response
+    template_name = "core/token.html"
+
       
     def get_context_data(self, **kwargs):
-      # print(settings.TRELLO_APIKEY)
-      context = super(OauthView, self).get_context_data(**kwargs)
-      context["apiKey"] = apiKey
+      token = self.request.GET.get('token')
+      context = super(TokenView, self).get_context_data(**kwargs)
+      context["apiKey"] = token
       return context

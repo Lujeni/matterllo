@@ -1,0 +1,13 @@
+{% extends 'core/base.html' %}
+{% block content %}
+  <div class="jumbotron">
+    <h2>Authorize successfully</h2>
+    <p><a id="gotoBoard" class="btn btn-lg btn-primary" href="/board" role="button">Go to board list</a></p>
+  </div>
+  <script>
+    const token = window.location.hash && window.location.hash.replace('#token=','')
+    console.log('token:',token)
+    document.getElementById("gotoBoard").setAttribute("href", "/board?token="+token)
+  </script>
+
+{% endblock %}

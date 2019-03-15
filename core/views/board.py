@@ -13,7 +13,7 @@ from trello import TrelloClient
 from core.models import Board, Webhook
 
 
-trello_client = TrelloClient(api_key=settings.TRELLO_APIKEY, token=settings.TRELLO_TOKEN)
+# trello_client = TrelloClient(api_key=settings.TRELLO_APIKEY, token=settings.TRELLO_TOKEN)
 
 
 @method_decorator(login_required, name='dispatch')
@@ -27,19 +27,28 @@ class BoardView(ListView):
 
     def get(self, request):
         try:
-            boards = trello_client.list_boards()
-            if boards:
-                result = [h.delete() for h in trello_client.list_hooks()]
-                print("delete trello hook :: result={}".format(result))
+            print "token: ",request.GET.get('token')
+            token = request.GET.get('token')
+            if token is None:
+                boards= None
+                print 'boards'
+                return super(BoardView, self).get(request)
+            else:
+                trello_client = TrelloClient(api_key=settings.TRELLO_APIKEY, token=token)
+                boards = trello_client.list_boards()
+                print boards
+                if boards:
+                    result = [h.delete() for h in trello_client.list_hooks()]
+                    print("delete trello hook :: result={}".format(result))
 
-            for board in boards:
-                slug_board = slugify(board.name, allow_unicode=False)
-                b, created = Board.objects.get_or_create(name=slug_board)
-                host = getenv("MATTERLLO_HOST") or request.get_host()
-                url = "{}://{}/callback/{}/".format(request.scheme, host, b.id)
-                result = trello_client.create_hook(url, board.id)
-                print("create trello hook :: callback={} :: board={} :: result={}".format(url, slug_board, result))
-            return super(BoardView, self).get(request)
+                for board in boards:
+                    slug_board = slugify(board.name, allow_unicode=False)
+                    b, created = Board.objects.get_or_create(name=slug_board)
+                    host = getenv("MATTERLLO_HOST") or request.get_host()
+                    url = "{}://{}/callback/{}/".format(request.scheme, host, b.id)
+                    result = trello_client.create_hook(url, board.id)
+                    print("create trello hook :: callback={} :: board={} :: result={}".format(url, slug_board, result))
+                return super(BoardView, self).get(request)
         except Exception as e:
             print("unable to display board :: {}".format(e))
             return super(BoardView, self).get(request)
@@ -48,7 +57,9 @@ class BoardView(ListView):
         """ Fishy way to ensure trello_client is configured.
         """
         try:
+            token = self.request.GET.get('token')
             context = super(BoardView, self).get_context_data(**kwargs)
+            trello_client = TrelloClient(api_key=settings.TRELLO_APIKEY, token=token)
             trello_client.list_boards()
             context['trello_error'] = None
         except Exception as e:
