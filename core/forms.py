@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from crispy_forms.bootstrap import FormActions, Field
 from crispy_forms.helper import FormHelper, Layout
-from crispy_forms.layout import Submit
+from crispy_forms.layout import Submit, HTML
 from django import forms
 
 from core.models import Bridge, Webhook
@@ -18,7 +18,9 @@ class BridgeCreateForm(forms.ModelForm):
         helper = self.helper = FormHelper()
 
         layout = helper.layout = Layout()
-        layout.append(Field('events'))
+        layout.append(Field('events', css_class='board-event'))
+        layout.append(FormActions(HTML('<button class="btn btn-info" type="button" onclick="document.querySelectorAll(\'.board-event\').forEach(x => x.checked = true);">Check all</button>')))
+        layout.append(FormActions(HTML('<button class="btn btn-info" type="button" onclick="document.querySelectorAll(\'.board-event\').forEach(x => x.checked = false);">Uncheck all</button>')))
         layout.append(FormActions(Submit('save', 'Save')))
 
         helper.form_show_labels = False
