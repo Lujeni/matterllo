@@ -62,7 +62,7 @@ class Bridge(models.Model):
         ('moveCardToBoard', 'moveCardToBoard'),
         ('removeLabelFromCard', 'removeLabelFromCard'),
         ('removeMemberFromCard', 'removeMemberFromCard'),
-        ('updateCard', 'updateCard (include moveCardToList, renameCard, renameCardDesc, updateCardDueDate, removeCardDueDate, archiveCard, unarchiveCard'),
+        ('updateCard', 'updateCard (include moveCardToList, renameCard, renameCardDesc, updateCardDueDate, removeCardDueDate, archiveCard, unarchiveCard)'),
         # checklist
         ('addChecklistToCard', 'addChecklistToCard'),
         ('createCheckItem', 'createCheckItem'),
