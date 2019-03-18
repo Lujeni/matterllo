@@ -8,7 +8,6 @@ from core.views import (
 
 
 urlpatterns = [
-    # url(r'^', BridgeListView.as_view(), name='index'),
     url(r'^$', OauthView.as_view(), name='index'),
 
     url(r'^callback/(?P<board_id>[0-9]+)/$', TrelloCallbacksView.as_view(), name='callback'),

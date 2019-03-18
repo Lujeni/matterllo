@@ -12,9 +12,12 @@
     </div>
   {% endif %}
 
-  <a href="#" class="list-group-item disabled">Choose your board</a>
-    {% for board in object_list %}
+  {% if trello_error == None %}
+    <a href="#" class="list-group-item disabled">Choose your board</a>
+  {% endif %}
+    {% for board in board_list %}
     <a href="{% url 'webhook_create' board.id %}" class="list-group-item"/>{{ board }}</a>
     {% endfor %}
 </div>
+
 {% endblock %}

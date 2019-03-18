@@ -27,23 +27,22 @@ class BoardView(ListView):
 
     def get(self, request):
         try:
-            print "token: ",request.GET.get('token')
             token = request.GET.get('token')
+            user = request.user
             if token is None:
                 boards= None
-                print 'boards'
                 return super(BoardView, self).get(request)
             else:
                 trello_client = TrelloClient(api_key=settings.TRELLO_APIKEY, token=token)
                 boards = trello_client.list_boards()
-                print boards
                 if boards:
                     result = [h.delete() for h in trello_client.list_hooks()]
                     print("delete trello hook :: result={}".format(result))
 
                 for board in boards:
+                    print "BOARD_ID:", board.id
                     slug_board = slugify(board.name, allow_unicode=False)
-                    b, created = Board.objects.get_or_create(name=slug_board)
+                    b, created = Board.objects.get_or_create(name=slug_board, user=user, trelloBoard_id = board.id, trello_token = token)
                     host = getenv("MATTERLLO_HOST") or request.get_host()
                     url = "{}://{}/callback/{}/".format(request.scheme, host, b.id)
                     result = trello_client.create_hook(url, board.id)
@@ -57,10 +56,15 @@ class BoardView(ListView):
         """ Fishy way to ensure trello_client is configured.
         """
         try:
-            token = self.request.GET.get('token')
             context = super(BoardView, self).get_context_data(**kwargs)
+            token = self.request.GET.get('token')
+            if token is None:
+                context['board_list'] = None
             trello_client = TrelloClient(api_key=settings.TRELLO_APIKEY, token=token)
             trello_client.list_boards()
+            user = self.request.user
+            listboard = Board.objects.filter(trello_token=token)
+            context['board_list'] = listboard
             context['trello_error'] = None
         except Exception as e:
             context['trello_error'] = "{} :: api_key={} :: token={}".format(e,

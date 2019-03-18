@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from ast import literal_eval
+from django.conf import settings
 
 from django.db import models
 
@@ -9,7 +10,9 @@ class Board(models.Model):
 
     name = models.CharField(max_length=100)
     webhook_activate = models.BooleanField(default=False)
-
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    trelloBoard_id = models.CharField(max_length=100)
+    trello_token = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
