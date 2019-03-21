@@ -1,1 +1,1 @@
-web: gunicorn matterllo.wsgi
+web: gunicorn matterllo.wsgi:application
