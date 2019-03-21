@@ -40,7 +40,7 @@ class BoardView(ListView):
                     print("delete trello hook :: result={}".format(result))
 
                 for board in boards:
-                    print "BOARD_ID:", board.id
+                    print ("BOARD_ID:", board.id)
                     slug_board = slugify(board.name, allow_unicode=False)
                     b, created = Board.objects.get_or_create(name=slug_board, user=user, trelloBoard_id = board.id, trello_token = token)
                     host = getenv("MATTERLLO_HOST") or request.get_host()
