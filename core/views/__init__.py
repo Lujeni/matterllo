@@ -6,3 +6,4 @@ from core.views.webhook import *
 from core.views.wizard import *
 from core.views.oauth import *
 from core.views.token import *
+from core.views.readme import *

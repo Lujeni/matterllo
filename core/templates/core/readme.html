@@ -1,0 +1,59 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+  <div class="row">
+    <h1>README</h1>
+    <h2>Instruction to integrate Matterllo with Mattermost</h2>
+    <span>
+      <strong>Step 1: Authorization with Trello</strong>
+    </span>
+    <ul>
+      <li>Visit home page of Matterllo at <pre>https://dsv-matterllo.herokuapp.com/</pre></li>
+      <li>Click the button <b>Log in with Trello</b> to connect to your Trello account</li>
+      <img src="{% static "core/img/readme/login-with-trello.png" %}" alt="Login With Trello" style="width: 70%" />
+      <li>Click <b>Allow</b> button to authorize</li>
+      <img src="{% static "core/img/readme/authorize-trello.png" %}" alt="Authorize Trello" style="width: 70%" />
+      <li>Now you can visit to your board list by click <b>Go to board list</b> button</li>
+      <img src="{% static "core/img/readme/go-to-board-list.png" %}" alt="Authorize success" style="width: 70%" />
+    </ul>
+    <span>
+      <strong>Step 2: Select a board that you want to receive notifications on Mattermost</strong>
+    </span>
+    <ul>
+        <img src="{% static "core/img/readme/boards-list.png" %}" alt="Board List" style="width: 70%" />
+    </ul>
+    <span>
+        <strong>Step 3: Create webhook on Mattermost</strong>
+    </span>
+    <ul>
+      <li>Visit your Mattermost Integration page, Select Incoming webhook</li>
+      <img src="{% static "core/img/readme/incoming-webhook.png" %}" alt="Incoming webhok" style="width: 70%" />
+      <li>Click <b>Add Incoming Webhook</b> button on the top right conner</li>
+      <li>Enter necessary information then click <b>Save</b></li>
+      <img src="{% static "core/img/readme/webhook-creating.png" %}" alt="Creating webhok" style="width: 70%" />
+      <li>After finishing creating webhook on Mattermost, you will get a webhook url like below:</li>
+      <pre>
+        https://YOUR_MATTERMOST_DOMAIN/hooks/WEBHOOK_ID
+      </pre>
+      <li>Copy this url and go to next step</li>
+    </ul>
+    <span>
+      <strong>Step 4: Add webhook to Matterllo</strong>
+    </span>
+    <ul>
+      <li>Turn back to Step 2, when you select a board, you will see this page</li>
+      <img src="{% static "core/img/readme/webhook-matterllo.png" %}" alt="Matterllo webhook" style="width: 70%" />
+      <li>Paste Mattermost webhook url that you created in Step 3 and give it a short description, then click <b>Next</b> button</li>
+      <li>Then, you select list of events on Trello that Matterllo will send Notifications to Mattermost when the event happens</li>
+      <img src="{% static "core/img/readme/webhook-matterlo-ok.png" %}" alt="Matterllo webhook ok" style="width: 70%" />
+      <li>Finally, click <b>Save</b> button to complete</li>
+      <img src="{% static "core/img/readme/events-list.png" %}" alt="Event list" style="width: 70%" />
+    </ul>
+    <span>
+      <strong>Step 5: Make a change in your Trello board and check Mattermost to see result</strong>
+    </span>
+    <ul>
+      <img src="{% static "core/img/readme/finish.png" %}" alt="Result" style="width: 70%" />
+    </ul>
+  </div>
+{% endblock %}

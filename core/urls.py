@@ -3,12 +3,14 @@ from django.conf.urls import url
 
 from core.views import (
     BoardView, BoardDetailView, WebhookDetailView, WebhookCreateView, BridgeCreateView,
-    BridgeDetailView, BridgeListView, MatterlloWizard, TrelloCallbacksView, OauthView, TokenView
+    BridgeDetailView, BridgeListView, MatterlloWizard, TrelloCallbacksView, OauthView, TokenView,
+    ReadmeView
 )
 
 
 urlpatterns = [
     url(r'^$', OauthView.as_view(), name='index'),
+    url(r'^readme/$', ReadmeView.as_view(), name='readme'),
 
     url(r'^callback/(?P<board_id>[0-9]+)/$', TrelloCallbacksView.as_view(), name='callback'),
     url(r'^accessToken/',TokenView.as_view(), name='access_token'),
