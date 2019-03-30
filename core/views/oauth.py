@@ -10,7 +10,7 @@ class OauthView(TemplateView):
     # model = Bridge
     template_name = "core/oauth.html"
     def get_context_data(self, **kwargs):
-      returnURL = self.request.build_absolute_uri()+'accessToken'
+      returnURL = self.request.build_absolute_uri()+'access_token'
       context = super(OauthView, self).get_context_data(**kwargs)
       context["apiKey"] = apiKey
       context["returnURL"] = returnURL

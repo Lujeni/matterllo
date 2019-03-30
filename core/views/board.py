@@ -13,7 +13,6 @@ from trello import TrelloClient
 from core.models import Board, Webhook
 
 
-# trello_client = TrelloClient(api_key=settings.TRELLO_APIKEY, token=settings.TRELLO_TOKEN)
 
 
 @method_decorator(login_required, name='dispatch')
@@ -30,7 +29,7 @@ class BoardView(ListView):
             token = request.GET.get('token')
             user = request.user
             if token is None:
-                boards= None
+                boards = None
                 return super(BoardView, self).get(request)
             else:
                 trello_client = TrelloClient(api_key=settings.TRELLO_APIKEY, token=token)
@@ -42,7 +41,7 @@ class BoardView(ListView):
                 for board in boards:
                     print ("BOARD_ID:", board.id)
                     slug_board = slugify(board.name, allow_unicode=False)
-                    b, created = Board.objects.get_or_create(name=slug_board, user=user, trelloBoard_id = board.id, trello_token = token)
+                    b, created = Board.objects.get_or_create(name=slug_board, user=user, trello_board_id = board.id, trello_token = token)
                     host = getenv("MATTERLLO_HOST") or request.get_host()
                     url = "{}://{}/callback/{}/".format(request.scheme, host, b.id)
                     result = trello_client.create_hook(url, board.id)

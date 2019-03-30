@@ -12,7 +12,7 @@
     </div>
   {% endif %}
 
-  {% if trello_error == None %}
+  {% if not trello_error %}
     <a href="#" class="list-group-item disabled">Choose your board</a>
   {% endif %}
     {% for board in board_list %}

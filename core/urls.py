@@ -13,7 +13,7 @@ urlpatterns = [
     url(r'^readme/$', ReadmeView.as_view(), name='readme'),
 
     url(r'^callback/(?P<board_id>[0-9]+)/$', TrelloCallbacksView.as_view(), name='callback'),
-    url(r'^accessToken/',TokenView.as_view(), name='access_token'),
+    url(r'^access_token/',TokenView.as_view(), name='access_token'),
 
     url(r'^board/$', BoardView.as_view(), name='board'),
     url(r'^board/(?P<pk>[0-9]+)/$', BoardDetailView.as_view(), name='board_detail'),
