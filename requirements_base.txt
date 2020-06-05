@@ -1,7 +1,7 @@
 astroid==1.6.0
 certifi==2019.3.9
 chardet==3.0.4
-Django==2.2.10
+Django==2.2.13
 django-crispy-forms==1.7.2
 django-formtools==2.1
 humanize==0.5.1
