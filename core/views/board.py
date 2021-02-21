@@ -56,7 +56,7 @@ class BoardView(ListView):
                         url, slug_board, result
                     )
                 )
-                return super(BoardView, self).get(request)
+            return super(BoardView, self).get(request)
         except Exception as e:
             print("unable to display board :: {}".format(e))
             return super(BoardView, self).get(request)
