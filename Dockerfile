@@ -1,8 +1,9 @@
 # syntax=docker/dockerfile:1.0.0-experimental
 FROM python:3.7-buster
 
-RUN apt-get update
-RUN apt-get upgrade -y
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
 RUN --mount=type=ssh pip3 install -r requirements.txt
