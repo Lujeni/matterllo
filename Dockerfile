@@ -6,7 +6,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
-RUN --mount=type=ssh pip3 install -r requirements.txt
+RUN --mount=type=ssh pip3 install --no-cache-dir -r requirements.txt
 
 RUN groupadd -g 1000 matterllo && useradd -rm -d /home/matterllo -s /bin/bash -g matterllo -u 1000 matterllo
 
