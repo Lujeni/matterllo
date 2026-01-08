@@ -19,6 +19,6 @@ pytz==2018.9
 requests-oauthlib==0.7.0
 requests==2.32.4
 six==1.11.0
-urllib3==2.6.0
+urllib3==2.6.3
 whitenoise==3.2.2
 wrapt==1.10.11
