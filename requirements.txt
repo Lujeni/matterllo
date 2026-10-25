@@ -1,6 +1,6 @@
 Django==5.2.17
 astroid==1.6.0
-certifi==2024.7.4
+certifi==2026.10.19
 chardet==3.0.4
 django-crispy-forms==1.8.1
 django-formtools==2.1
