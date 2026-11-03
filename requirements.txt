@@ -13,7 +13,7 @@ matterhook==0.1
 mccabe==0.6.1
 oauthlib==2.0.1
 py-trello==0.7.0
-pylint==1.8.1
+pylint==4.0.9
 python-dateutil==2.6.0
 pytz==2018.9
 requests-oauthlib==0.7.0
